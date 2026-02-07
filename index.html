@@ -9,23 +9,20 @@
     <style>
         :root {
             --bg-color: #050505;
-            --accent: #5865F2; /* Discord Color */
+            --accent: #5865F2; 
             --accent-hover: #4752c4;
             --minecraft: #43b581;
             --staff: #ed4245;
             --text-main: #ffffff;
             --text-muted: #b9bbbe;
             --modal-bg: #0f0f12;
+            --gold: #fbbf24;
         }
 
-        /* --- SCROLLBAR PERSONALIZADA (Adiós barra fea) --- */
+       
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0a0b; }
-        ::-webkit-scrollbar-thumb { 
-            background: #2b2d31; 
-            border-radius: 4px; 
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+        ::-webkit-scrollbar-thumb { background: #2b2d31; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -39,7 +36,7 @@
             line-height: 1.6;
         }
 
-        /* --- FONDO ANIMADO --- */
+        
         #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
@@ -48,7 +45,7 @@
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
-        /* --- HEADER PROFESIONAL (NAVBAR) --- */
+        
         header {
             padding: 15px 0;
             position: fixed; width: 100%; top: 0; z-index: 100;
@@ -58,14 +55,9 @@
         }
 
         .header-content { display: flex; justify-content: space-between; align-items: center; }
-
-        .logo { 
-            font-size: 1.5rem; font-weight: 800; color: #fff; 
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; 
-        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; }
         .logo span { color: var(--accent); }
 
-        /* Menú de Navegación */
         .nav-menu { display: flex; gap: 30px; align-items: center; }
         .nav-link {
             color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem;
@@ -79,97 +71,95 @@
         .nav-link:hover::after { width: 100%; }
 
         .lang-btn {
-            background: rgba(88, 101, 242, 0.1);
-            border: 1px solid var(--accent);
+            background: rgba(88, 101, 242, 0.1); border: 1px solid var(--accent);
             color: #fff; padding: 6px 14px; border-radius: 20px;
             cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
             transition: 0.3s; font-size: 0.85rem;
         }
         .lang-btn:hover { background: var(--accent); transform: scale(1.05); }
 
-        /* --- HERO --- */
+        
         .hero {
-            height: 80vh; /* Un poco más alto para compensar el header */
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; text-align: center;
-            padding-top: 60px;
+            height: 80vh; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; text-align: center; padding-top: 60px;
         }
-
         .hero h1 {
-            font-size: 5rem;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 40px rgba(88, 101, 242, 0.4);
-            animation: glow 3s infinite alternate;
+            font-size: 5rem; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 20px;
+            text-shadow: 0 0 40px rgba(88, 101, 242, 0.4); animation: glow 3s infinite alternate;
         }
+        @keyframes glow { from { text-shadow: 0 0 20px rgba(88, 101, 242, 0.2); } to { text-shadow: 0 0 50px rgba(88, 101, 242, 0.6); } }
+        .hero p { color: var(--text-muted); font-size: 1.4rem; max-width: 800px; font-weight: 300; letter-spacing: 1px; }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(88, 101, 242, 0.2); }
-            to { text-shadow: 0 0 50px rgba(88, 101, 242, 0.6); }
-        }
-
-        .hero p { 
-            color: var(--text-muted); font-size: 1.4rem; 
-            max-width: 800px; font-weight: 300; letter-spacing: 1px;
-        }
-
-        /* --- SECCIONES --- */
+        
         .section-header { text-align: center; width: 100%; margin: 6rem 0 3rem; }
         .section-title { font-size: 2.5rem; position: relative; display: inline-block; margin: 0; }
         .section-title::after { 
             content: ''; display: block; width: 60px; height: 3px; 
-            background: var(--accent); margin: 15px auto 0; 
-            box-shadow: 0 0 10px var(--accent); 
+            background: var(--accent); margin: 15px auto 0; box-shadow: 0 0 10px var(--accent); 
         }
 
-        /* --- GRID SERVICIOS --- */
-        .grid-services {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px; padding-bottom: 50px;
+       /
+        .demo-section {
+            background: linear-gradient(145deg, rgba(88, 101, 242, 0.1), rgba(0,0,0,0));
+            border: 1px solid var(--accent); border-radius: 20px;
+            padding: 40px; margin-bottom: 80px; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: space-between; gap: 40px;
         }
+        .demo-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--minecraft), var(--accent));
+            animation: borderRun 3s infinite linear; background-size: 200%;
+        }
+        @keyframes borderRun { 0% { background-position: 0%; } 100% { background-position: 200%; } }
 
+        .demo-content { flex: 1; z-index: 2; }
+        .demo-badge {
+            background: var(--gold); color: black; font-weight: bold; font-size: 0.8rem;
+            padding: 5px 10px; border-radius: 5px; margin-bottom: 15px; display: inline-block;
+        }
+        .demo-title { font-size: 2rem; margin-bottom: 10px; color: white; }
+        .demo-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1.1rem; }
+        
+        .demo-btn {
+            background: var(--text-main); color: black; padding: 12px 30px;
+            border-radius: 50px; text-decoration: none; font-weight: bold;
+            display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .demo-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.3); }
+
+        .demo-visual {
+            font-size: 8rem; color: rgba(255,255,255,0.05);
+            transform: rotate(-15deg); position: relative;
+        }
+        .demo-visual i { text-shadow: 0 0 50px rgba(88, 101, 242, 0.5); }
+
+        
+        .grid-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; padding-bottom: 50px; }
         .service-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 25px; border-radius: 15px;
-            text-align: center; cursor: pointer;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 25px; border-radius: 15px; text-align: center; cursor: pointer;
+            transition: 0.4s; position: relative; overflow: hidden;
         }
-
         .service-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         .service-card i { font-size: 3rem; color: var(--text-main); margin-bottom: 25px; transition: 0.3s; }
         .service-card:hover i { color: var(--accent); transform: scale(1.1); text-shadow: 0 0 20px var(--accent); }
 
-        /* --- MÉTODOS DE PAGO --- */
+        
         .payments-section { padding: 50px 0; text-align: center; }
-        .payment-grid {
-            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px;
-        }
-        .payment-item {
-            display: flex; flex-direction: column; align-items: center; gap: 15px;
-            color: var(--text-muted); font-size: 0.95rem;
-        }
+        .payment-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
+        .payment-item { display: flex; flex-direction: column; align-items: center; gap: 15px; color: var(--text-muted); }
         .payment-icon {
-            font-size: 2rem; color: #fff;
-            background: linear-gradient(145deg, #1e1f22, #151618);
-            padding: 20px; width: 80px; height: 80px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 2rem; color: #fff; background: linear-gradient(145deg, #1e1f22, #151618);
+            padding: 20px; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
         }
-        .payment-item:hover .payment-icon { 
-            border-color: var(--accent); color: var(--accent); 
-            transform: translateY(-5px); box-shadow: 0 10px 20px rgba(88, 101, 242, 0.2); 
-        }
+        .payment-item:hover .payment-icon { border-color: var(--accent); color: var(--accent); transform: translateY(-5px); }
 
-        /* --- MODALES --- */
+       
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
-            display: none; align-items: center; justify-content: center;
-            z-index: 2000; opacity: 0; transition: opacity 0.3s ease;
+            display: none; align-items: center; justify-content: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease;
         }
         .modal.show { opacity: 1; }
         .modal-content {
@@ -179,61 +169,41 @@
             transform: translateY(50px); transition: transform 0.3s ease;
         }
         .modal.show .modal-content { transform: translateY(0); }
-        .close-modal { position: absolute; top: 25px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; transition: 0.2s; }
-        .close-modal:hover { color: var(--staff); transform: rotate(90deg); }
-
-        /* Estilos dentro Modal */
+        .close-modal { position: absolute; top: 25px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; }
+        .close-modal:hover { color: var(--staff); }
+        
         .modal-h2 { font-size: 2rem; margin-bottom: 10px; text-align: center; }
         .modal-sub { color: var(--text-muted); text-align: center; margin-bottom: 30px; display: block; }
-        
-        .cmd-group { margin-bottom: 35px; }
-        .cmd-title { font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        
-        .cmd-item { 
-            background: rgba(255,255,255,0.03); padding: 20px; 
-            border-radius: 10px; margin-bottom: 15px; 
-            border-left: 4px solid var(--accent);
-        }
-        .cmd-name { color: var(--accent); font-weight: bold; font-family: 'Courier New', monospace; font-size: 1.1rem; }
-        .cmd-desc { color: #ccc; font-size: 0.95rem; margin-top: 5px; display: block; }
 
+        .cmd-group { margin-bottom: 35px; }
+        .cmd-title { font-size: 1.2rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .cmd-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--accent); }
+        .cmd-name { color: var(--accent); font-weight: bold; font-family: monospace; font-size: 1.1rem; }
+        .cmd-desc { color: #ccc; font-size: 0.95rem; margin-top: 5px; display: block; }
         .staff-border { border-left-color: var(--staff) !important; }
         .staff-text { color: var(--staff) !important; }
-
         .auto-list { list-style: none; padding-left: 10px; }
         .auto-list li { margin-bottom: 15px; position: relative; padding-left: 25px; }
         .auto-list li::before { content: '•'; color: var(--minecraft); font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
 
-        /* --- CONTACTO --- */
+        
         .contact-section { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         .discord-box {
             background: #2b2d31; display: inline-flex; align-items: center;
             padding: 30px 60px; border-radius: 20px; gap: 30px;
-            border: 1px solid rgba(88, 101, 242, 0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            transition: 0.3s; margin-top: 40px;
+            border: 1px solid rgba(88, 101, 242, 0.3); transition: 0.3s; margin-top: 30px;
         }
         .discord-box:hover { border-color: var(--accent); transform: scale(1.02); }
         .btn-copy {
             padding: 12px 30px; background: var(--accent); color: white;
-            border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem;
-            transition: 0.2s;
+            border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
         }
-        .btn-copy:hover { background: var(--accent-hover); box-shadow: 0 0 15px var(--accent); }
 
-        /* --- UTILS --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .lang-en { display: none; }
+        @media (max-width: 768px) { .nav-menu { display: none; } .demo-section { flex-direction: column; text-align: center; } .demo-visual { display: none; } }
         .btn-link {
             display: inline-block; padding: 12px 30px; background: var(--accent);
             color: white; text-decoration: none; border-radius: 8px; margin-top: 20px; font-weight: 600;
-        }
-        
-        /* Ocultar elementos */
-        .lang-en { display: none; }
-        
-        @media (max-width: 768px) {
-            .nav-menu { display: none; } /* Ocultar menú en móviles por simplicidad */
-            .hero h1 { font-size: 3rem; }
         }
     </style>
 </head>
@@ -244,25 +214,13 @@
     <header>
         <div class="container header-content">
             <a href="#" class="logo">Pola<span>Godd</span></a>
-            
             <nav class="nav-menu">
-                <a href="#servicios" class="nav-link lang-es">Servicios</a>
-                <a href="#servicios" class="nav-link lang-en">Services</a>
-                
-                <a href="#pagos" class="nav-link lang-es">Métodos de Pago</a>
-                <a href="#pagos" class="nav-link lang-en">Payments</a>
-                
-                <a href="#contacto" class="nav-link lang-es">Contacto</a>
-                <a href="#contacto" class="nav-link lang-en">Contact</a>
-                
-                <button class="lang-btn" onclick="toggleLanguage()">
-                    <i class="fas fa-globe"></i> <span id="lang-text">ES</span>
-                </button>
+                <a href="#servicios" class="nav-link lang-es">Servicios</a> <a href="#servicios" class="nav-link lang-en">Services</a>
+                <a href="#demo" class="nav-link lang-es">Tiendas</a> <a href="#demo" class="nav-link lang-en">Store</a>
+                <a href="#pagos" class="nav-link lang-es">Pagos</a> <a href="#pagos" class="nav-link lang-en">Payments</a>
+                <a href="#contacto" class="nav-link lang-es">Contacto</a> <a href="#contacto" class="nav-link lang-en">Contact</a>
+                <button class="lang-btn" onclick="toggleLanguage()"><i class="fas fa-globe"></i> <span id="lang-text">ES</span></button>
             </nav>
-
-            <button class="lang-btn" onclick="toggleLanguage()" style="display: none;">
-                <i class="fas fa-globe"></i>
-            </button>
         </div>
     </header>
 
@@ -306,22 +264,44 @@
         </div>
     </section>
 
+    <section id="demo" class="container reveal">
+        <div class="demo-section">
+            <div class="demo-content">
+                <span class="demo-badge lang-es">NUEVO LANZAMIENTO</span>
+                <span class="demo-badge lang-en">NEW RELEASE</span>
+                
+                <h2 class="demo-title lang-es">Tienda E-Commerce Premium</h2>
+                <h2 class="demo-title lang-en">Premium E-Commerce Store</h2>
+                
+                <p class="demo-desc lang-es">
+                    Descubre el futuro de las ventas en Minecraft. Animaciones 3D, carrito interactivo y diseño Glassmorphism.
+                </p>
+                <p class="demo-desc lang-en">
+                    Discover the future of Minecraft sales. 3D animations, interactive cart, and Glassmorphism design.
+                </p>
+                
+                <a href="tienda.html" target="_blank" class="demo-btn">
+                    <i class="fas fa-shopping-bag"></i> polagodd.store
+                </a>
+            </div>
+            <div class="demo-visual">
+                <i class="fas fa-store"></i>
+            </div>
+        </div>
+    </section>
+
     <section id="pagos" class="container reveal payments-section">
         <h2 class="section-title lang-es" style="font-size: 2rem;">Métodos de Pago</h2>
         <h2 class="section-title lang-en" style="font-size: 2rem;">Payment Methods</h2>
-        
         <div class="payment-grid">
             <div class="payment-item">
-                <div class="payment-icon"><i class="fab fa-paypal"></i></div>
-                <span>PayPal</span>
+                <div class="payment-icon"><i class="fab fa-paypal"></i></div> <span>PayPal</span>
             </div>
             <div class="payment-item">
-                <div class="payment-icon"><i class="fab fa-bitcoin"></i></div>
-                <span class="lang-es">Criptomonedas</span><span class="lang-en">Crypto</span>
+                <div class="payment-icon"><i class="fab fa-bitcoin"></i></div> <span class="lang-es">Criptomonedas</span><span class="lang-en">Crypto</span>
             </div>
             <div class="payment-item">
-                <div class="payment-icon"><i class="fas fa-hand-holding-dollar"></i></div>
-                <span>Mercado Pago</span>
+                <div class="payment-icon"><i class="fas fa-hand-holding-dollar"></i></div> <span>Mercado Pago</span>
             </div>
         </div>
     </section>
@@ -340,23 +320,23 @@
                     <h3 class="cmd-title"><i class="fas fa-list-ul" style="color: var(--accent);"></i> Comandos de Información</h3>
                     <div class="cmd-item">
                         <span class="cmd-name">!ip / !ip</span>
-                        <span class="cmd-desc">Muestra un cuadro elegante con la dirección (play.enderland.org) y versiones.</span>
+                        <span class="cmd-desc">Muestra un cuadro elegante con la dirección (play.enderland.org) y versiones (1.16 - 1.21).</span>
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!web / !web</span>
-                        <span class="cmd-desc">Envía el enlace directo a la página oficial.</span>
+                        <span class="cmd-desc">Envía el enlace directo a la página oficial (https://enderland.org).</span>
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!tienda / !tienda</span>
-                        <span class="cmd-desc">Link de la tienda para ver rangos y beneficios.</span>
+                        <span class="cmd-desc">Muestra el link de la tienda para ver rangos y beneficios.</span>
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!discord / !discord</span>
-                        <span class="cmd-desc">Genera una invitación permanente.</span>
+                        <span class="cmd-desc">Genera una invitación permanente para compartir.</span>
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!players / !status</span>
-                        <span class="cmd-desc">Consulta tiempo real: Online/Offline y lista de jugadores.</span>
+                        <span class="cmd-desc">Consulta en tiempo real: Online/Offline, cantidad de jugadores y lista de nombres.</span>
                     </div>
                 </div>
 
@@ -364,16 +344,16 @@
                     <h3 class="cmd-title"><i class="fas fa-shield-alt" style="color: var(--staff);"></i> Comandos de Staff</h3>
                     <div class="cmd-item staff-border">
                         <span class="cmd-name staff-text">!msg #canal texto</span>
-                        <span class="cmd-desc">Envía mensajes oficiales. El bot borra tu comando y publica el texto limpio.</span>
+                        <span class="cmd-desc">Envía mensajes oficiales. El bot borra tu comando original y publica el texto limpio.</span>
                     </div>
                 </div>
 
                 <div class="cmd-group">
                     <h3 class="cmd-title"><i class="fas fa-robot" style="color: var(--minecraft);"></i> Funciones Automáticas</h3>
                     <ul class="auto-list">
-                        <li><b>Estado Dinámico:</b> Actualiza "Jugando con X" cada 60s.</li>
-                        <li><b>Detección Inteligente:</b> Entiende menciones de canales (#general).</li>
-                        <li><b>Auto-Limpieza:</b> Mensajes de confirmación se borran a los 3s.</li>
+                        <li><b>Estado Dinámico 24/7:</b> Cada 60s actualiza su estado: "Jugando con 10/100" o "Servidor Offline 🔴".</li>
+                        <li><b>Detección Inteligente:</b> Entiende si mencionas el canal (#general) o solo escribes el nombre.</li>
+                        <li><b>Auto-Limpieza:</b> Los mensajes de confirmación ("Enviado con éxito") se borran a los 3 segundos.</li>
                     </ul>
                 </div>
             </div>
@@ -388,11 +368,11 @@
                     <h3 class="cmd-title"><i class="fas fa-list-ul" style="color: var(--accent);"></i> Info Commands</h3>
                     <div class="cmd-item">
                         <span class="cmd-name">!ip / !ip</span>
-                        <span class="cmd-desc">Displays IP (play.enderland.org) and versions.</span>
+                        <span class="cmd-desc">Displays IP (play.enderland.org) and supported versions box.</span>
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!web / !web</span>
-                        <span class="cmd-desc">Direct link to official website.</span>
+                        <span class="cmd-desc">Direct link to official website (https://enderland.org).</span>
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!tienda / !store</span>
@@ -404,7 +384,7 @@
                     </div>
                     <div class="cmd-item">
                         <span class="cmd-name">!players / !status</span>
-                        <span class="cmd-desc">Real-time status: Online/Offline and player list.</span>
+                        <span class="cmd-desc">Real-time status: Online/Offline, player count, and player names list.</span>
                     </div>
                 </div>
 
@@ -412,16 +392,16 @@
                     <h3 class="cmd-title"><i class="fas fa-shield-alt" style="color: var(--staff);"></i> Staff Commands</h3>
                     <div class="cmd-item staff-border">
                         <span class="cmd-name staff-text">!msg #channel text</span>
-                        <span class="cmd-desc">Official announcements. Bot deletes command and posts clean text.</span>
+                        <span class="cmd-desc">Sends official messages. The bot deletes your command and posts clean text.</span>
                     </div>
                 </div>
 
                 <div class="cmd-group">
                     <h3 class="cmd-title"><i class="fas fa-robot" style="color: var(--minecraft);"></i> Auto Features</h3>
                     <ul class="auto-list">
-                        <li><b>Dynamic Status:</b> Updates "Playing with X" every 60s.</li>
-                        <li><b>Smart Detection:</b> Understands channel mentions.</li>
-                        <li><b>Auto-Cleanup:</b> Confirmation messages delete after 3s.</li>
+                        <li><b>24/7 Dynamic Status:</b> Updates every 60s: "Playing with 10/100" or "Server Offline 🔴".</li>
+                        <li><b>Smart Detection:</b> Understands channel mentions (#general) or plain text names.</li>
+                        <li><b>Auto-Cleanup:</b> Confirmation messages ("Sent successfully") auto-delete after 3 seconds.</li>
                     </ul>
                 </div>
             </div>
@@ -500,13 +480,15 @@
     </div>
 
     <section id="contacto" class="contact-section container reveal">
-        <div class="section-header" style="margin-top: 0;">
-            <h2 class="section-title lang-es">Hablemos</h2>
-            <h2 class="section-title lang-en">Contact</h2>
-        </div>
+        <h2 class="section-title lang-es" style="margin: 0;">Contacto</h2> 
+        <h2 class="section-title lang-en" style="margin: 0;">Contact</h2>
         
-        <p class="lang-es" style="color: var(--text-muted); margin-bottom: 30px;">¿Necesitas soporte o quieres empezar un proyecto?</p>
-        <p class="lang-en" style="color: var(--text-muted); margin-bottom: 30px;">Need support or want to start a project?</p>
+        <p class="lang-es" style="color: var(--text-muted); margin-top: 20px; margin-bottom: 30px;">
+            ¿Necesitas soporte o quieres empezar un proyecto?
+        </p>
+        <p class="lang-en" style="color: var(--text-muted); margin-top: 20px; margin-bottom: 30px;">
+            Need support or want to start a project?
+        </p>
         
         <div class="discord-box">
             <i class="fab fa-discord" style="font-size: 3rem; color: #5865F2;"></i>
@@ -524,41 +506,26 @@
     </footer>
 
     <script>
-        // --- IDIOMA ---
         let currentLang = 'es';
-
         function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
             document.getElementById('lang-text').innerText = currentLang.toUpperCase();
-            
-            // Toggle Display Block/Inline/None
             document.querySelectorAll(`.lang-${currentLang === 'es' ? 'en' : 'es'}`).forEach(el => el.style.display = 'none');
             document.querySelectorAll(`.lang-${currentLang}`).forEach(el => {
-                if(el.classList.contains('nav-link')) el.style.display = 'inline-block';
-                else el.style.display = 'block';
+                if(el.classList.contains('nav-link') || el.classList.contains('demo-badge')) el.style.display = 'inline-block';
+                else if(el.tagName === 'P' || el.tagName === 'H2' || el.tagName === 'DIV' || el.tagName === 'UL') el.style.display = 'block';
+                else el.style.display = 'inline-block';
             });
         }
 
-        // --- FONDO ANIMADO ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
-
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
         class Particle {
-            constructor() {
-                this.x = Math.random() * width; this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
-            }
-            update() {
-                this.x += this.vx; this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(88, 101, 242, 0.3)'; ctx.beginPath();
-                ctx.arc(this.x, this.y, Math.random() * 2, 0, Math.PI * 2); ctx.fill();
-            }
+            constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random()-0.5)*0.5; this.vy = (Math.random()-0.5)*0.5; }
+            update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>width)this.vx*=-1; if(this.y<0||this.y>height)this.vy*=-1; }
+            draw() { ctx.fillStyle = 'rgba(88, 101, 242, 0.3)'; ctx.beginPath(); ctx.arc(this.x, this.y, Math.random()*2, 0, Math.PI*2); ctx.fill(); }
         }
         function init() { particles = []; for(let i=0; i<60; i++) particles.push(new Particle()); }
         function animate() {
@@ -571,29 +538,17 @@
                 for (let j = i + 1; j < particles.length; j++) {
                     let p2 = particles[j];
                     let d = Math.sqrt((p.x-p2.x)**2 + (p.y-p2.y)**2);
-                    if (d < 150) {
-                        ctx.strokeStyle = `rgba(88, 101, 242, ${0.1 - d/1500})`;
-                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-                    }
+                    if (d < 150) { ctx.strokeStyle = `rgba(88, 101, 242, ${0.1 - d/1500})`; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
                 }
             });
             requestAnimationFrame(animate);
         }
-        window.addEventListener('resize', () => { resize(); init(); });
-        resize(); init(); animate();
+        window.addEventListener('resize', () => { resize(); init(); }); resize(); init(); animate();
 
-        // --- MODALES ---
-        function openModal(id) {
-            const m = document.getElementById(id); m.style.display = 'flex';
-            setTimeout(() => m.classList.add('show'), 10); document.body.style.overflow = 'hidden';
-        }
-        function closeModal(id) {
-            const m = document.getElementById(id); m.classList.remove('show');
-            setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 300);
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; setTimeout(() => document.getElementById(id).classList.add('show'), 10); document.body.style.overflow = 'hidden'; }
+        function closeModal(id) { document.getElementById(id).classList.remove('show'); setTimeout(() => { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }, 300); }
         window.onclick = e => { if(e.target.classList.contains('modal')) closeModal(e.target.id); }
 
-        // --- COPY ---
         function copyDiscord() {
             navigator.clipboard.writeText("polagodd");
             const btns = document.querySelectorAll('.btn-copy');
@@ -602,14 +557,11 @@
                     const original = btn.innerText;
                     btn.innerText = currentLang === 'es' ? "¡Copiado!" : "Copied!";
                     btn.style.background = "#43b581";
-                    setTimeout(() => {
-                        btn.innerText = original; btn.style.background = "var(--accent)";
-                    }, 2000);
+                    setTimeout(() => { btn.innerText = original; btn.style.background = "var(--accent)"; }, 2000);
                 }
             });
         }
 
-        // --- REVEAL ---
         const obs = new IntersectionObserver(e => e.forEach(en => { if(en.isIntersecting) en.target.classList.add('active'); }), {threshold: 0.1});
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </script>
