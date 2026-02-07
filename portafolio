@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polagodd | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --accent: #5865F2; /* Discord Color */
+            --accent-hover: #4752c4;
+            --minecraft: #43b581;
+            --staff: #ed4245;
+            --text-main: #ffffff;
+            --text-muted: #b9bbbe;
+            --modal-bg: #0f0f12;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6; /* Espaciado general mejorado */
+        }
+
+        /* --- FONDO ANIMADO --- */
+        #bg-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1b1e 0%, #000000 100%);
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+        /* --- HEADER & LANGUAGE --- */
+        header {
+            padding: 20px 0;
+            position: fixed; width: 100%; top: 0; z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; }
+        .logo span { color: var(--accent); }
+
+        .lang-btn {
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid var(--accent);
+            color: #fff; padding: 8px 16px; border-radius: 20px;
+            cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .lang-btn:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 75vh;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(88, 101, 242, 0.4);
+        }
+
+        .hero p { 
+            color: var(--text-muted); font-size: 1.5rem; 
+            max-width: 800px; font-weight: 300; letter-spacing: 1px;
+        }
+
+        /* --- SECCIONES --- */
+        .section-header { text-align: center; width: 100%; margin: 5rem 0 3rem; }
+        .section-title { font-size: 2.5rem; position: relative; display: inline-block; margin: 0; }
+        .section-title::after { 
+            content: ''; display: block; width: 60px; height: 3px; 
+            background: var(--accent); margin: 15px auto 0; 
+            box-shadow: 0 0 10px var(--accent); 
+        }
+
+        /* --- SERVICIOS GRID --- */
+        .grid-services {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px; padding-bottom: 50px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 25px; border-radius: 15px;
+            text-align: center; cursor: pointer;
+            transition: 0.3s ease; position: relative; overflow: hidden;
+        }
+
+        .service-card:hover { transform: translateY(-7px); border-color: var(--accent); box-shadow: 0 0 30px rgba(88, 101, 242, 0.15); }
+        .service-card i { font-size: 3rem; color: var(--text-main); margin-bottom: 25px; transition: 0.3s; }
+        .service-card:hover i { color: var(--accent); transform: scale(1.1); text-shadow: 0 0 15px var(--accent); }
+
+        /* --- MÉTODOS DE PAGO --- */
+        .payments-section { padding: 50px 0; text-align: center; }
+        .payment-grid {
+            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px;
+        }
+        .payment-item {
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        .payment-icon {
+            font-size: 2.5rem; color: #fff;
+            background: rgba(255,255,255,0.05); padding: 15px;
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .payment-item:hover .payment-icon { border-color: var(--accent); color: var(--accent); transform: scale(1.1); }
+
+        /* --- MODALES --- */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal.show { opacity: 1; }
+        .modal-content {
+            background: var(--modal-bg); width: 95%; max-width: 900px; max-height: 90vh;
+            border-radius: 20px; padding: 50px; position: relative; overflow-y: auto;
+            border: 1px solid var(--accent); box-shadow: 0 0 60px rgba(88, 101, 242, 0.2);
+            transform: translateY(50px); transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content { transform: translateY(0); }
+        .close-modal { position: absolute; top: 25px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; transition: 0.2s; }
+        .close-modal:hover { color: var(--staff); transform: rotate(90deg); }
+
+        /* --- ESTILOS DE TEXTO EN MODALES --- */
+        .modal-h2 { font-size: 2rem; margin-bottom: 10px; text-align: center; }
+        .modal-sub { color: var(--text-muted); text-align: center; margin-bottom: 30px; display: block; }
+        
+        .cmd-group { margin-bottom: 35px; }
+        .cmd-title { font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        
+        .cmd-item { 
+            background: rgba(255,255,255,0.03); padding: 20px; 
+            border-radius: 10px; margin-bottom: 15px; 
+            border-left: 4px solid var(--accent);
+        }
+        .cmd-name { color: var(--accent); font-weight: bold; font-family: 'Courier New', monospace; font-size: 1.1rem; }
+        .cmd-desc { color: #ccc; font-size: 0.95rem; margin-top: 5px; display: block; }
+
+        .staff-border { border-left-color: var(--staff) !important; }
+        .staff-text { color: var(--staff) !important; }
+
+        .auto-list { list-style: none; padding-left: 10px; }
+        .auto-list li { margin-bottom: 15px; position: relative; padding-left: 25px; }
+        .auto-list li::before { content: '•'; color: var(--minecraft); font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
+
+        /* --- CONTACTO --- */
+        .contact-section { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .discord-box {
+            background: #2b2d31; display: inline-flex; align-items: center;
+            padding: 25px 50px; border-radius: 15px; gap: 30px;
+            border: 1px solid rgba(88, 101, 242, 0.3); box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            transition: 0.3s; margin-top: 30px;
+        }
+        .discord-box:hover { border-color: var(--accent); transform: scale(1.02); }
+        .btn-copy {
+            padding: 12px 30px; background: var(--accent); color: white;
+            border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem;
+        }
+
+        /* --- UTILS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .btn-link {
+            display: inline-block; padding: 12px 30px; background: var(--accent);
+            color: white; text-decoration: none; border-radius: 8px; margin-top: 20px; font-weight: 600;
+        }
+
+        /* SISTEMA DE TRADUCCIÓN (Display Toggle) */
+        .lang-en { display: none; }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Pola<span>Godd</span></a>
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i> <span id="lang-text">ES</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <h1 class="reveal">Polagodd</h1>
+        
+        <p class="reveal lang-es">Arquitectura de Servidores & Soluciones Digitales</p>
+        <p class="reveal lang-en">Server Architecture & Digital Solutions</p>
+    </section>
+
+    <section id="servicios" class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title lang-es">Servicios</h2>
+            <h2 class="section-title lang-en">Services</h2>
+        </div>
+        
+        <div class="grid-services">
+            <div class="service-card" onclick="openModal('modal-web')">
+                <i class="fas fa-globe"></i>
+                <h3 class="lang-es">Páginas Web</h3> <h3 class="lang-en">Web Development</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Landing pages y sitios completos.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Landing pages & Full sites.</p>
+            </div>
+            <div class="service-card" onclick="openModal('modal-bots')">
+                <i class="fab fa-discord"></i>
+                <h3 class="lang-es">Bots de Discord</h3> <h3 class="lang-en">Discord Bots</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Sistemas automáticos y moderación.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Automation & Moderation systems.</p>
+            </div>
+            <div class="service-card" onclick="openModal('modal-mc')">
+                <i class="fas fa-cube"></i>
+                <h3 class="lang-es">Servidores Minecraft</h3> <h3 class="lang-en">Minecraft Servers</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Configuración y Redes.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Networks & Setup.</p>
+            </div>
+            <div class="service-card" onclick="openModal('modal-config')">
+                <i class="fas fa-cogs"></i>
+                <h3 class="lang-es">Configurador</h3> <h3 class="lang-en">Configuration</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Plugins y Optimización.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Plugins & Optimization.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container reveal payments-section">
+        <h2 class="section-title lang-es" style="font-size: 2rem;">Métodos de Pago</h2>
+        <h2 class="section-title lang-en" style="font-size: 2rem;">Payment Methods</h2>
+        
+        <div class="payment-grid">
+            <div class="payment-item">
+                <div class="payment-icon"><i class="fab fa-paypal"></i></div>
+                <span>PayPal</span>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><i class="fab fa-bitcoin"></i></div>
+                <span class="lang-es">Criptomonedas</span><span class="lang-en">Crypto</span>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                <span>Mercado Pago</span>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-bots" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-bots')">&times;</span>
+            
+            <div class="lang-es">
+                <h2 class="modal-h2">🤖 Sistema de Bots Avanzado</h2>
+                <span class="modal-sub">
+                    Pruébalo ahora en: <a href="https://discord.gg/SFMFn5mDds" target="_blank" style="color: var(--accent);">discord.gg/SFMFn5mDds</a>
+                </span>
+
+                <div class="cmd-group">
+                    <h3 class="cmd-title"><i class="fas fa-list-ul" style="color: var(--accent);"></i> Comandos de Información</h3>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!ip / !ip</span>
+                        <span class="cmd-desc">Muestra un cuadro elegante con la dirección (play.enderland.org) y versiones (1.16 - 1.21).</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!web / !web</span>
+                        <span class="cmd-desc">Envía el enlace directo a la página oficial (https://enderland.org).</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!tienda / !tienda</span>
+                        <span class="cmd-desc">Muestra el link de la tienda para ver rangos y beneficios.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!discord / !discord</span>
+                        <span class="cmd-desc">Genera una invitación permanente para compartir.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!players / !status</span>
+                        <span class="cmd-desc">Consulta en tiempo real: Online/Offline, cantidad de jugadores y lista de nombres.</span>
+                    </div>
+                </div>
+
+                <div class="cmd-group">
+                    <h3 class="cmd-title"><i class="fas fa-shield-alt" style="color: var(--staff);"></i> Comandos de Staff</h3>
+                    <div class="cmd-item staff-border">
+                        <span class="cmd-name staff-text">!msg #canal texto</span>
+                        <span class="cmd-desc">Envía mensajes oficiales. El bot borra tu comando original y publica el texto limpio.</span>
+                        <span class="cmd-desc" style="font-size: 0.8rem; opacity: 0.7;">Seguridad: Requiere permiso de "Gestionar Canales" o "Administrador".</span>
+                    </div>
+                </div>
+
+                <div class="cmd-group">
+                    <h3 class="cmd-title"><i class="fas fa-robot" style="color: var(--minecraft);"></i> Funciones Automáticas</h3>
+                    <ul class="auto-list">
+                        <li><b>Estado Dinámico 24/7:</b> Cada 60s actualiza su estado: "Jugando con 10/100" o "Servidor Offline 🔴".</li>
+                        <li><b>Detección Inteligente:</b> Entiende si mencionas el canal (#general) o solo escribes el nombre.</li>
+                        <li><b>Auto-Limpieza:</b> Los mensajes de confirmación ("Enviado con éxito") se borran a los 3 segundos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lang-en">
+                <h2 class="modal-h2">🤖 Advanced Bot System</h2>
+                <span class="modal-sub">
+                    Test it now at: <a href="https://discord.gg/SFMFn5mDds" target="_blank" style="color: var(--accent);">discord.gg/SFMFn5mDds</a>
+                </span>
+
+                <div class="cmd-group">
+                    <h3 class="cmd-title"><i class="fas fa-list-ul" style="color: var(--accent);"></i> Info Commands</h3>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!ip / !ip</span>
+                        <span class="cmd-desc">Displays IP (play.enderland.org) and supported versions box.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!web / !web</span>
+                        <span class="cmd-desc">Direct link to official website (https://enderland.org).</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!tienda / !store</span>
+                        <span class="cmd-desc">Shows the store link for ranks and perks.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!discord</span>
+                        <span class="cmd-desc">Generates a permanent invite link.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <span class="cmd-name">!players / !status</span>
+                        <span class="cmd-desc">Real-time status: Online/Offline, player count, and player names list.</span>
+                    </div>
+                </div>
+
+                <div class="cmd-group">
+                    <h3 class="cmd-title"><i class="fas fa-shield-alt" style="color: var(--staff);"></i> Staff Commands</h3>
+                    <div class="cmd-item staff-border">
+                        <span class="cmd-name staff-text">!msg #channel text</span>
+                        <span class="cmd-desc">Sends official messages. The bot deletes your command and posts clean text.</span>
+                        <span class="cmd-desc" style="font-size: 0.8rem; opacity: 0.7;">Security: Requires "Manage Channels" or "Admin" permission.</span>
+                    </div>
+                </div>
+
+                <div class="cmd-group">
+                    <h3 class="cmd-title"><i class="fas fa-robot" style="color: var(--minecraft);"></i> Auto Features</h3>
+                    <ul class="auto-list">
+                        <li><b>24/7 Dynamic Status:</b> Updates every 60s: "Playing with 10/100" or "Server Offline 🔴".</li>
+                        <li><b>Smart Detection:</b> Understands channel mentions (#general) or plain text names.</li>
+                        <li><b>Auto-Cleanup:</b> Confirmation messages ("Sent successfully") auto-delete after 3 seconds.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modal-web" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closeModal('modal-web')">&times;</span>
+            <i class="fas fa-laptop-code" style="font-size: 4rem; color: var(--accent); margin-bottom: 20px;"></i>
+            
+            <div class="lang-es">
+                <h2>Desarrollo Web Profesional</h2>
+                <p style="color: var(--text-muted); margin: 20px 0; line-height: 1.8;">
+                    Sitios modernos con las mejores animaciones. <br>
+                    Ejemplo real: <strong>Enderland.org</strong>
+                </p>
+                <a href="https://enderland.org" target="_blank" class="btn-link">Ver sitio Enderland</a>
+            </div>
+
+            <div class="lang-en">
+                <h2>Professional Web Dev</h2>
+                <p style="color: var(--text-muted); margin: 20px 0; line-height: 1.8;">
+                    Modern sites with top-tier animations. <br>
+                    Real example: <strong>Enderland.org</strong>
+                </p>
+                <a href="https://enderland.org" target="_blank" class="btn-link">Visit Enderland</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mc" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-mc')">&times;</span>
+            
+            <div class="lang-es">
+                <h2>🎮 Servidores de Minecraft</h2>
+                <div style="margin-top: 20px; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                    <h3 style="color: var(--minecraft);">Enderland Network</h3>
+                    <p style="margin: 15px 0;">IP: <code style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 5px;">play.enderland.org</code></p>
+                    <p style="color: var(--text-muted);">Servidor Semi-Anárquico optimizado. Soporte versiones 1.16 - 1.21.</p>
+                </div>
+            </div>
+
+            <div class="lang-en">
+                <h2>🎮 Minecraft Servers</h2>
+                <div style="margin-top: 20px; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                    <h3 style="color: var(--minecraft);">Enderland Network</h3>
+                    <p style="margin: 15px 0;">IP: <code style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 5px;">play.enderland.org</code></p>
+                    <p style="color: var(--text-muted);">Optimized Semi-Anarchy. Support versions 1.16 - 1.21.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-config" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-config')">&times;</span>
+            
+            <div class="lang-es">
+                <h2>🛠️ Configuración de Servidores</h2>
+                <ul class="auto-list" style="margin-top: 30px; color: var(--text-muted);">
+                    <li>Configuración avanzada de <b>LuckPerms</b>.</li>
+                    <li>Sistemas de rangos y permisos.</li>
+                    <li>Optimización de Spigot/Paper/Purpur.</li>
+                    <li>Protección Anti-Cheat y Anti-Bot.</li>
+                </ul>
+            </div>
+
+            <div class="lang-en">
+                <h2>🛠️ Server Configuration</h2>
+                <ul class="auto-list" style="margin-top: 30px; color: var(--text-muted);">
+                    <li>Advanced <b>LuckPerms</b> setup.</li>
+                    <li>Rank and permission systems.</li>
+                    <li>Spigot/Paper/Purpur optimization.</li>
+                    <li>Anti-Cheat and Anti-Bot protection.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section id="contacto" class="contact-section container reveal">
+        <div class="section-header" style="margin-top: 0;">
+            <h2 class="section-title lang-es">Hablemos</h2>
+            <h2 class="section-title lang-en">Contact</h2>
+        </div>
+        
+        <p class="lang-es" style="color: var(--text-muted); margin-bottom: 30px;">¿Necesitas soporte o quieres empezar un proyecto?</p>
+        <p class="lang-en" style="color: var(--text-muted); margin-bottom: 30px;">Need support or want to start a project?</p>
+        
+        <div class="discord-box">
+            <i class="fab fa-discord" style="font-size: 3rem; color: #5865F2;"></i>
+            <div style="text-align: left;">
+                <h4 style="margin: 0; font-size: 1.2rem; color: white;">Discord</h4>
+                <span style="color: #b9bbbe; font-size: 1rem;">polagodd</span>
+            </div>
+            <button class="btn-copy lang-es" onclick="copyDiscord()">Copiar ID</button>
+            <button class="btn-copy lang-en" onclick="copyDiscord()">Copy ID</button>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: #555; font-size: 0.8rem;">
+        &copy; 2026 Polagodd. <span class="lang-es">Todos los derechos reservados.</span><span class="lang-en">All rights reserved.</span>
+    </footer>
+
+    <script>
+        // --- IDIOMA ---
+        let currentLang = 'es';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('lang-text').innerText = currentLang.toUpperCase();
+
+            // Ocultar todos los elementos del idioma anterior
+            document.querySelectorAll(`.lang-${currentLang === 'es' ? 'en' : 'es'}`).forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // Mostrar elementos del idioma actual
+            document.querySelectorAll(`.lang-${currentLang}`).forEach(el => {
+                // Verificar si es un span/h/p o un div para asignar el display correcto
+                if(el.tagName === 'DIV' || el.tagName === 'UL') el.style.display = 'block';
+                else el.style.display = 'inline-block';
+                
+                // Corrección para elementos específicos
+                if(el.classList.contains('service-card')) el.style.display = 'block';
+                if(el.tagName === 'P' || el.tagName === 'H2' || el.tagName === 'H3') el.style.display = 'block';
+            });
+        }
+
+        // --- FONDO ANIMADO ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width; this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(88, 101, 242, 0.3)'; ctx.beginPath();
+                ctx.arc(this.x, this.y, Math.random() * 2, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        function init() { particles = []; for(let i=0; i<60; i++) particles.push(new Particle()); }
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            let gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
+            gradient.addColorStop(0, '#101012'); gradient.addColorStop(1, '#050505');
+            ctx.fillStyle = gradient; ctx.fillRect(0,0,width,height);
+            particles.forEach((p, i) => {
+                p.update(); p.draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let d = Math.sqrt((p.x-p2.x)**2 + (p.y-p2.y)**2);
+                    if (d < 150) {
+                        ctx.strokeStyle = `rgba(88, 101, 242, ${0.1 - d/1500})`;
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize(); init(); animate();
+
+        // --- MODALES ---
+        function openModal(id) {
+            const m = document.getElementById(id); m.style.display = 'flex';
+            setTimeout(() => m.classList.add('show'), 10); document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            const m = document.getElementById(id); m.classList.remove('show');
+            setTimeout(() => { m.style.display = 'none'; document.body.style.overflow = 'auto'; }, 300);
+        }
+        window.onclick = e => { if(e.target.classList.contains('modal')) closeModal(e.target.id); }
+
+        // --- COPY ---
+        function copyDiscord() {
+            navigator.clipboard.writeText("polagodd");
+            // Detectar botón visible (ES o EN)
+            const btns = document.querySelectorAll('.btn-copy');
+            btns.forEach(btn => {
+                if(getComputedStyle(btn).display !== 'none') {
+                    const original = btn.innerText;
+                    btn.innerText = currentLang === 'es' ? "¡Copiado!" : "Copied!";
+                    btn.style.background = "#43b581";
+                    setTimeout(() => {
+                        btn.innerText = original; btn.style.background = "var(--accent)";
+                    }, 2000);
+                }
+            });
+        }
+
+        // --- REVEAL ---
+        const obs = new IntersectionObserver(e => e.forEach(en => { if(en.isIntersecting) en.target.classList.add('active'); }), {threshold: 0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>
