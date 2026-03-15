@@ -206,6 +206,7 @@
             <a href="#" class="logo">Pola<span>Godd</span></a>
             <nav class="nav-menu">
                 <a href="#servicios" class="nav-link lang-es">Servicios</a> <a href="#servicios" class="nav-link lang-en">Services</a>
+                <a href="#mantenimientos" class="nav-link lang-es">Mantenimientos</a> <a href="#mantenimientos" class="nav-link lang-en">Maintenance</a>
                 <a href="#demo" class="nav-link lang-es">Tiendas</a> <a href="#demo" class="nav-link lang-en">Store</a>
                 <a href="#pagos" class="nav-link lang-es">Pagos</a> <a href="#pagos" class="nav-link lang-en">Payments</a>
                 <a href="#contacto" class="nav-link lang-es">Contacto</a> <a href="#contacto" class="nav-link lang-en">Contact</a>
@@ -250,6 +251,40 @@
                 <h3 class="lang-es">Configurador</h3> <h3 class="lang-en">Configuration</h3>
                 <p class="lang-es" style="color: var(--text-muted);">Plugins y Optimización.</p>
                 <p class="lang-en" style="color: var(--text-muted);">Plugins & Optimization.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="mantenimientos" class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title lang-es">Mantenimientos y Trabajos Extra</h2>
+            <h2 class="section-title lang-en">Maintenance & Extra Work</h2>
+        </div>
+
+        <div class="grid-services" style="margin-bottom: 40px;">
+            <div class="service-card" onclick="openModal('modal-mant-mensual')">
+                <i class="fas fa-calendar-check"></i>
+                <h3 class="lang-es">Mantenimiento Mensual</h3> <h3 class="lang-en">Monthly Maintenance</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Planes desde 15 USD/mes.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Plans starting at 15 USD/mo.</p>
+            </div>
+            <div class="service-card" onclick="openModal('modal-cambios-extra')">
+                <i class="fas fa-tools"></i>
+                <h3 class="lang-es">Cambios Extra</h3> <h3 class="lang-en">Extra Changes</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Modificaciones puntuales en tu web.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Specific modifications for your site.</p>
+            </div>
+            <div class="service-card" onclick="openModal('modal-servicios-tecnicos')">
+                <i class="fas fa-server"></i>
+                <h3 class="lang-es">Servicios Técnicos</h3> <h3 class="lang-en">Technical Services</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Hosting, dominios, backups y más.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Hosting, domains, backups and more.</p>
+            </div>
+            <div class="service-card" onclick="openModal('modal-urgencias')" style="border-color: rgba(237, 66, 69, 0.3);">
+                <i class="fas fa-exclamation-triangle" style="color: var(--staff);"></i>
+                <h3 class="lang-es" style="color: var(--staff);">Urgencias</h3> <h3 class="lang-en" style="color: var(--staff);">Urgencies</h3>
+                <p class="lang-es" style="color: var(--text-muted);">Trabajos prioritarios en el día.</p>
+                <p class="lang-en" style="color: var(--text-muted);">Priority same-day tasks.</p>
             </div>
         </div>
     </section>
@@ -465,6 +500,130 @@
                     <li>Spigot/Paper/Purpur optimization.</li>
                     <li>Anti-Cheat and Anti-Bot protection.</li>
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mant-mensual" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-mant-mensual')">&times;</span>
+            <div class="lang-es">
+                <h2 class="modal-h2">💻 Mantenimiento Mensual</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <span class="cmd-name" style="color: white; font-size: 1.2rem;">Mantenimiento básico</span>
+                            <span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">15 USD / mes</span>
+                        </div>
+                        <span class="cmd-desc">Revisión general de la página para asegurar que funcione correctamente, corrección de pequeños errores y hasta 1 o 2 cambios simples de texto o precios durante el mes.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <span class="cmd-name" style="color: white; font-size: 1.2rem;">Mantenimiento normal</span>
+                            <span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">20 USD / mes</span>
+                        </div>
+                        <span class="cmd-desc">Incluye revisión del sitio, corrección de errores, cambios de textos, precios o imágenes y hasta 3 o 4 modificaciones simples durante el mes.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <span class="cmd-name" style="color: white; font-size: 1.2rem;">Mantenimiento completo</span>
+                            <span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">30 USD / mes</span>
+                        </div>
+                        <span class="cmd-desc">Incluye revisión frecuente del sitio, corrección de errores, cambios de contenido cuando sea necesario, optimización básica y soporte para pequeñas modificaciones durante el mes.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-en">
+                <h2 class="modal-h2">💻 Monthly Maintenance</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <span class="cmd-name" style="color: white; font-size: 1.2rem;">Basic maintenance</span>
+                            <span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">15 USD / month</span>
+                        </div>
+                        <span class="cmd-desc">General site review to ensure proper functionality, minor bug fixes, and up to 1 or 2 simple text or price changes during the month.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <span class="cmd-name" style="color: white; font-size: 1.2rem;">Normal maintenance</span>
+                            <span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">20 USD / month</span>
+                        </div>
+                        <span class="cmd-desc">Includes site review, bug fixes, text, price or image changes, and up to 3 or 4 simple modifications during the month.</span>
+                    </div>
+                    <div class="cmd-item">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <span class="cmd-name" style="color: white; font-size: 1.2rem;">Complete maintenance</span>
+                            <span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">30 USD / month</span>
+                        </div>
+                        <span class="cmd-desc">Includes frequent site review, bug fixes, content changes when necessary, basic optimization, and support for minor modifications during the month.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-cambios-extra" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-cambios-extra')">&times;</span>
+            <div class="lang-es">
+                <h2 class="modal-h2">🔧 Cambios o trabajos extra</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Cambiar textos o precios</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">5 USD</span></div><span class="cmd-desc">Modificar información existente en la página, como descripciones, precios, horarios o datos de contacto.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Subir imágenes o productos</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">5 USD</span></div><span class="cmd-desc">Agregar nuevas imágenes, productos o elementos visuales dentro de secciones ya existentes.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Agregar una sección nueva</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">20 USD</span></div><span class="cmd-desc">Crear una nueva parte dentro de la página, como una sección de promociones, galería o información adicional.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Arreglar un error de la web</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Detectar y corregir problemas que afecten el funcionamiento de la página, como botones que no funcionan o secciones que no cargan bien.</span></div>
+                </div>
+            </div>
+            <div class="lang-en">
+                <h2 class="modal-h2">🔧 Extra changes or tasks</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Change texts or prices</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">5 USD</span></div><span class="cmd-desc">Modify existing information on the page, such as descriptions, prices, schedules, or contact details.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Upload images or products</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">5 USD</span></div><span class="cmd-desc">Add new images, products, or visual elements within existing sections.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Add a new section</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">20 USD</span></div><span class="cmd-desc">Create a new part within the page, such as a promotions section, gallery, or additional information.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Fix a website error</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Detect and correct issues affecting the page's functionality, such as non-working buttons or sections that don't load properly.</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-servicios-tecnicos" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-servicios-tecnicos')">&times;</span>
+            <div class="lang-es">
+                <h2 class="modal-h2">⚙️ Servicios técnicos</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Configurar dominio</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Vincular el dominio del cliente con la página web para que funcione correctamente en internet.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Configurar hosting</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Preparar el servidor donde se aloja la página para que el sitio funcione correctamente.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Hacer backup de la web</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">5 USD</span></div><span class="cmd-desc">Crear una copia de seguridad completa del sitio para poder restaurarlo en caso de errores o pérdida de información.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Optimizar velocidad</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">15 USD</span></div><span class="cmd-desc">Realizar ajustes para que la página cargue más rápido y tenga mejor rendimiento.</span></div>
+                </div>
+            </div>
+            <div class="lang-en">
+                <h2 class="modal-h2">⚙️ Technical services</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Configure domain</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Link the client's domain with the website so it works correctly on the internet.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Configure hosting</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Prepare the server where the page is hosted so the site functions correctly.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Website backup</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">5 USD</span></div><span class="cmd-desc">Create a full backup of the site to be able to restore it in case of errors or data loss.</span></div>
+                    <div class="cmd-item"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name" style="color: white; font-size: 1.2rem;">Optimize speed</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">15 USD</span></div><span class="cmd-desc">Make adjustments so the page loads faster and performs better.</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-urgencias" class="modal">
+        <div class="modal-content" style="border-color: var(--staff);">
+            <span class="close-modal" onclick="closeModal('modal-urgencias')">&times;</span>
+            <div class="lang-es">
+                <h2 class="modal-h2" style="color: var(--staff);">🚨 Urgencias</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item staff-border"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name staff-text" style="font-size: 1.2rem;">Cambio urgente (en el día)</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Realizar una modificación solicitada por el cliente el mismo día, priorizando ese trabajo sobre otras tareas.</span></div>
+                </div>
+            </div>
+            <div class="lang-en">
+                <h2 class="modal-h2" style="color: var(--staff);">🚨 Urgencies</h2>
+                <div class="cmd-group">
+                    <div class="cmd-item staff-border"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;"><span class="cmd-name staff-text" style="font-size: 1.2rem;">Urgent change (same day)</span><span style="color: var(--gold); font-weight: bold; font-size: 1.1rem;">10 USD</span></div><span class="cmd-desc">Make a modification requested by the client on the same day, prioritizing that work over other tasks.</span></div>
+                </div>
             </div>
         </div>
     </div>
